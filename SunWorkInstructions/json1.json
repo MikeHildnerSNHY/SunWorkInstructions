@@ -1,0 +1,220 @@
+﻿a:36: {
+  "s": null,
+  18: "\"REDIRECT_UNIQUE_ID\";s"
+  null,
+  : null,
+  27: "\"WxUqpNJrRkURbY@drpAq9gAAAAA\";s"
+  null,
+  : null,
+  14: "\"REDIRECT_HTTPS\";s"
+  null,
+  : null,
+  2: "\"on\";s"
+  null,
+  : null,
+  20: "\"REDIRECT_SSL_TLS_SNI\";s"
+  null,
+  : null,
+  21: "\"vwi.sunhydraulics.com\";s"
+  null,
+  : null,
+  15: "\"REDIRECT_STATUS\";s"
+  null,
+  : null,
+  3: "\"200\";s"
+  null,
+  : null,
+  9: "\"UNIQUE_ID\";s"
+  null,
+  : null,
+  27: "\"WxUqpNJrRkURbY@drpAq9gAAAAA\";s"
+  null,
+  : null,
+  4: "\"BASE\";s"
+  null,
+  : null,
+  6: "\"/web2/\";s"
+  null,
+  : null,
+  5: "\"HTTPS\";s"
+  null,
+  : null,
+  2: "\"on\";s"
+  null,
+  : null,
+  11: "\"SSL_TLS_SNI\";s"
+  null,
+  : null,
+  21: "\"vwi.sunhydraulics.com\";s"
+  null,
+  : null,
+  11: "\"HTTP_X_WSSE\";s"
+  null,
+  : null,
+  182: "\"UsernameToken Username=\"mhildner\", PasswordDigest=\"74wRXHEorJoEElQloLY98U5aHSU=\", Nonce=\"aho+8gLjYNwxIQ22Anma7A==\", Created=\"2018-06-04T12"
+  null,
+  : "03"
+  null,
+  : "47+00"
+  null,
+  : "00\", Organization=\"Sun",
+  "Hydraulics\"\";s": null,
+  9: "\"HTTP_HOST\";s"
+  null,
+  : null,
+  21: "\"vwi.sunhydraulics.com\";s"
+  null,
+  : null,
+  15: "\"HTTP_CONNECTION\";s"
+  null,
+  : null,
+  10: "\"Keep-Alive\";s"
+  null,
+  : null,
+  4: "\"PATH\";s"
+  null,
+  : null,
+  49: "\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin\";s"
+  null,
+  : null,
+  16: "\"SERVER_SIGNATURE\";s"
+  null,
+  : null,
+  0: "\"\";s"
+  null,
+  : null,
+  15: "\"SERVER_SOFTWARE\";s"
+  null,
+  : null,
+  6: "\"Apache\";s"
+  null,
+  : null,
+  11: "\"SERVER_NAME\";s"
+  null,
+  : null,
+  21: "\"vwi.sunhydraulics.com\";s"
+  null,
+  : null,
+  11: "\"SERVER_ADDR\";s"
+  null,
+  : null,
+  12: "\"172.16.2.145\";s"
+  null,
+  : null,
+  11: "\"SERVER_PORT\";s"
+  null,
+  : null,
+  3: "\"443\";s"
+  null,
+  : null,
+  11: "\"REMOTE_ADDR\";s"
+  null,
+  : null,
+  11: "\"172.17.8.91\";s"
+  null,
+  : null,
+  13: "\"DOCUMENT_ROOT\";s"
+  null,
+  : null,
+  23: "\"/www/vkscentral.com/web\";s"
+  null,
+  : null,
+  14: "\"REQUEST_SCHEME\";s"
+  null,
+  : null,
+  5: "\"https\";s"
+  null,
+  : null,
+  14: "\"CONTEXT_PREFIX\";s"
+  null,
+  : null,
+  0: "\"\";s"
+  null,
+  : null,
+  21: "\"CONTEXT_DOCUMENT_ROOT\";s"
+  null,
+  : null,
+  23: "\"/www/vkscentral.com/web\";s"
+  null,
+  : null,
+  12: "\"SERVER_ADMIN\";s"
+  null,
+  : null,
+  14: "\"root@localhost\";s"
+  null,
+  : null,
+  15: "\"SCRIPT_FILENAME\";s"
+  null,
+  : null,
+  36: "\"/www/vkscentral.com/web/web2/app.php\";s"
+  null,
+  : null,
+  11: "\"REMOTE_PORT\";s"
+  null,
+  : null,
+  5: "\"56334\";s"
+  null,
+  : null,
+  21: "\"REDIRECT_QUERY_STRING\";s"
+  null,
+  : null,
+  11: "\"v=1&lang=en\";s"
+  null,
+  : null,
+  12: "\"REDIRECT_URL\";s"
+  null,
+  : null,
+  14: "\"/dqs/locations\";s"
+  null,
+  : null,
+  17: "\"GATEWAY_INTERFACE\";s"
+  null,
+  : null,
+  7: "\"CGI/1.1\";s"
+  null,
+  : null,
+  15: "\"SERVER_PROTOCOL\";s"
+  null,
+  : null,
+  8: "\"HTTP/1.1\";s"
+  null,
+  : null,
+  14: "\"REQUEST_METHOD\";s"
+  null,
+  : null,
+  3: "\"GET\";s"
+  null,
+  : null,
+  12: "\"QUERY_STRING\";s"
+  null,
+  : null,
+  11: "\"v=1&lang=en\";s"
+  null,
+  : null,
+  11: "\"REQUEST_URI\";s"
+  null,
+  : null,
+  26: "\"/dqs/locations?v=1&lang=en\";s"
+  null,
+  : null,
+  11: "\"SCRIPT_NAME\";s"
+  null,
+  : null,
+  14: "\"/web2//app.php\";s"
+  null,
+  : null,
+  8: "\"PHP_SELF\";s"
+  null,
+  : null,
+  14: "\"/web2//app.php\";s"
+  null,
+  : null,
+  18: "\"REQUEST_TIME_FLOAT\";d"
+  null,
+  : "1528113828.273;s"
+  null,
+  : null,
+  12: "\"REQUEST_TIME\";i"
+  null,
+  : "1528113828;"
+}
