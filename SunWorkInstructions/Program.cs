@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.IO;
 using VisualKnowledgeShare.Security;
+using System.Configuration;
 
 namespace SunWorkInstructions
 {
@@ -14,36 +15,26 @@ namespace SunWorkInstructions
 
         static void Main(string[] args)
         {
-            SendRequest2().Wait();
+            HttpResponseMessage response = SendTestRequest().Result;
+            string json = response.Content.ReadAsStringAsync().Result;
         }
 
-        private static async Task<HttpResponseMessage> SendRequest2()
+        private static async Task<HttpResponseMessage> SendTestRequest()
         {
-            //var user = "api.connector";
-            var user = "mhildner";
-            var organization = "Sun Hydraulics";
-            //var apiToken = "bXRzNzh0UHlBSVZ1RkVoU29CQkdvdUxaYmsyaTlRQWE2MlgxSkFvaG9za0xxendSMTBWeHR0ekRrNVlvcElONGdBZCtJdnFiQlVLTmx4UzhtdGNuWXpBcmsyL2RSOXRMR1E1K1BmTGhkQVA2ZGwyZW56MDJmMzVJK3lGLzUvZjk=";
-            var mikesToken = "OU54T1kvc3NkWktTaFRCSzBTSHFKWFFRY1h6dmFldjNDMjZjeUNRQVk3V0F5WktSdWRMek1NOXVIL1FaMXNrMEZ1TmJiUm5YNUlJK29WQVFNeTlqUUREOWdCVDBQT0lYTlZ3Y0I5SkpNL0lJZXBvUG9VU3h5QVZXSWhEVEpMTHY=";
-            var wsse = new VisualKnowledgeShare.Security.Wsse(user, organization, mikesToken);
+            var organization = ConfigurationManager.AppSettings["VKSOrganization"];
+            var user = ConfigurationManager.AppSettings["VKSUser"];
+            var token = ConfigurationManager.AppSettings["VKSToken"];
+            var baseUri = ConfigurationManager.AppSettings["VKSBaseUri"];
+
+            var wsse = new VisualKnowledgeShare.Security.Wsse(user, organization, token);
             string wsseHeader = wsse.GenerateXwsseHeader();
             _client.DefaultRequestHeaders.Add("X-WSSE", wsseHeader);
 
-            //HttpResponseMessage response = await _client.GetAsync("https://vwi.sunhydraulics.com/dqs/guidebooks/?lang=en&v=1&name=*assembly*");
-            HttpResponseMessage response = await _client.GetAsync("https://vwi.sunhydraulics.com/dqs/locations?v=1&lang=en");
+            string uri = baseUri + "/locations?v=1&lang=en";
+            //string uri = baseUri + "/guidebooks/?lang=en&v=1&name=*assembly*";  // Not sure if I'm calling this right, but returns "not implemented".
 
-            return response;
-        }
+            HttpResponseMessage response = await _client.GetAsync(uri);
 
-        private static async Task<HttpResponseMessage> SendRequest()
-        {
-            string wsseHeader = CreateWsseHeader();
-
-            _client.BaseAddress = new Uri("https://vwi.sunhydraulics.com/dqs/");
-            _client.DefaultRequestHeaders.Add("Accept", "application/json");
-            //_client.DefaultRequestHeaders.Add("Authorization", "WSSE profile=\"UsernameToken\"");
-            _client.DefaultRequestHeaders.Add("X-WSSE", wsseHeader);
-
-            HttpResponseMessage response = await _client.GetAsync("https://vwi.sunhydraulics.com/dqs/guidebooks/?lang=en&v=1&name=*assembly*");
             return response;
         }
 
@@ -181,95 +172,5 @@ namespace SunWorkInstructions
             }
             return hex.ToString().ToLower();
         }
-
-
     }
 }
-//class Program
-//{
-//    private static readonly HttpClient _client = new HttpClient();
-//    static void Main(string[] args)
-//    {
-//        GetAsync().Wait();
-
-//    }
-
-//    static async Task<HttpResponseMessage> GetAsync()
-//    {
-//        _client.BaseAddress = new Uri("https://vwi.sunhydraulics.com/dqs/");
-//        _client.DefaultRequestHeaders.Add("Accept", "application/json");
-//        _client.DefaultRequestHeaders.Add("Authorization", "WSSE profile=\"UsernameToken\"");
-
-//        string organization = "Sun Hydraulics";
-//        string userName = "Mike Hildner";
-//        byte[] key = CreateMD5(userName);
-//        string token = "QkU4ZW84TVNRb25lZnByUit5YmtyU1l6Yjc1YlIrcmIwaklGWDREZjdVQUtGVm9LekpWTjV1YWF1NDUrWkNKcWMzSEh5SS93Qzd0R1I2MlVCUmV5ZzhKc3BXV3IyQ0Qvbi9JWXZIVE9qL3lid1lqWDBmNmNzek5KRCs0dzZIdmI=";
-//        byte[] tokenBytes = Convert.FromBase64String(token);
-//        byte[] iv = new byte[16];
-//        Buffer.BlockCopy(tokenBytes, 0, iv, 0, 16);
-
-
-//        // OpenSsl stuff.
-//        string cryptAlgo = "AES-256-CFB";
-//        //byte[] data = Convert.FromBase64String(token);
-//        //string dataString = Encoding.UTF8.GetString(data);
-//        Aes aes = AesManaged.Create();
-//        ICryptoTransform encryptor = aes.CreateEncryptor(key, iv);
-//        byte[] outputBuffer = new byte[tokenBytes.Length];
-//        var x = encryptor.TransformBlock(tokenBytes, 0, tokenBytes.Length, outputBuffer, 0);
-//        string secret = Convert.ToBase64String(outputBuffer);
-
-//        string nonce = GenerateUniqueKey(64);
-//        string currentTime = DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'+00:00'");
-
-//        string stringToSha = nonce + currentTime + secret;
-//        byte[] bytesToSha = Encoding.ASCII.GetBytes(stringToSha);
-//        byte[] sha = SHA1.Create().ComputeHash(bytesToSha);
-//        var reversedSha = sha.Reverse().ToArray();
-//        string passwordDigest = Convert.ToBase64String(reversedSha);
-//        string xWsseHeader = string.Format("UsernameToken Username=\"{0}\",PasswordDigest=\"{1}\",Nonce=\"{2}\",Created=\"{3}\",Organization=\"{4}\"", userName, passwordDigest, nonce, currentTime, organization);
-//        _client.DefaultRequestHeaders.Add("X-WSSE", xWsseHeader);
-
-//        var values = new Dictionary<string, string>
-//        {
-
-//        };
-
-//        HttpResponseMessage response = await _client.GetAsync("https://vwi.sunhydraulics.com/dqs/guidebooks/?lang=en&v=1&name=*assembly*");
-
-//        return response;
-
-//    }
-
-//    static byte[] CreateMD5(string input)
-//    {
-//        // Use input string to calculate MD5 hash
-//        using (MD5 md5 = MD5.Create())
-//        {
-//            byte[] inputBytes = Encoding.ASCII.GetBytes(input);
-//            byte[] hashBytes = md5.ComputeHash(inputBytes);
-
-//            return hashBytes;
-//        }
-//    }
-
-//    static string GenerateUniqueKey(int maxSize)
-//    {
-//        char[] chars = new char[62];
-//        chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
-//        byte[] data = new byte[1];
-//        using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
-//        {
-//            crypto.GetNonZeroBytes(data);
-//            data = new byte[maxSize];
-//            crypto.GetNonZeroBytes(data);
-//        }
-//        StringBuilder result = new StringBuilder(maxSize);
-//        foreach (byte b in data)
-//        {
-//            result.Append(chars[b % (chars.Length)]);
-//        }
-//        return result.ToString();
-//    }
-//}
-//}
