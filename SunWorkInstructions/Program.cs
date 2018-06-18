@@ -15,11 +15,17 @@ namespace SunWorkInstructions
 
         static void Main(string[] args)
         {
-            HttpResponseMessage response = SendTestRequest().Result;
+            string op = "/locations?v=1&lang=en";  // Default something if not specified.
+            if(args.Length > 0)
+            {
+                op = args[0];
+            }
+            HttpResponseMessage response = SendTestRequest(op).Result;
             string json = response.Content.ReadAsStringAsync().Result;
+            Console.WriteLine(json);
         }
 
-        private static async Task<HttpResponseMessage> SendTestRequest()
+        private static async Task<HttpResponseMessage> SendTestRequest(string op)
         {
             var organization = ConfigurationManager.AppSettings["VKSOrganization"];
             var user = ConfigurationManager.AppSettings["VKSUser"];
@@ -30,7 +36,7 @@ namespace SunWorkInstructions
             string wsseHeader = wsse.GenerateXwsseHeader();
             _client.DefaultRequestHeaders.Add("X-WSSE", wsseHeader);
 
-            string uri = baseUri + "/locations?v=1&lang=en";
+            string uri = baseUri + op;
             //string uri = baseUri + "/guidebooks/?lang=en&v=1&name=*assembly*";  // Not sure if I'm calling this right, but returns "not implemented".
 
             HttpResponseMessage response = await _client.GetAsync(uri);
